@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1764278995 source:c:\users\gabri\jogojogo\jogojogo\main.c
+	"jogo.h"
+	"io.h"
+	"raylib.h"
+	<string.h>
+	<stdlib.h>
+
+1764278995 c:\users\gabri\jogojogo\jogojogo\jogo.h
+
+1764274266 source:c:\users\gabri\jogojogo\jogojogo\jogo_nave.c
+	"jogo.h"
+	"stdio.h"
+	"raylib.h"
+
+1764277954 source:c:\users\gabri\jogojogo\jogojogo\menu.c
+	"jogo.h"
+	"stdio.h"
+	"raylib.h"
+
