@@ -2,34 +2,38 @@
 #include "stdio.h"
 #include "raylib.h"
 
-void iniciar_jogo(){
-    //largura e altura da tela
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "River Raid");
-    SetTargetFPS(60);// Ajusta a janela para 60 frames por segundo
-
-    Vector2 posicao_nave = { (float)screenWidth/2, (float)screenHeight/2 };
-    //Este laco repete enquanto a janela nao for fechada
-    //Utilizamos ele para atualizar o estado do programa / jogo
-    while (!WindowShouldClose())
-    {
-	// Trata entrada do usuario e atualiza estado do jogo
-	if (IsKeyDown(KEY_RIGHT)) posicao_nave.x += 2;
-	if (IsKeyDown(KEY_LEFT)) posicao_nave.x -= 2;
-	if (IsKeyDown(KEY_UP)) posicao_nave.y -= 2;
-	if (IsKeyDown(KEY_DOWN)) posicao_nave.y += 2;
-
-	// Atualiza o que eh mostrado na tela a partir do estado do jogo
-	BeginDrawing(); //Inicia o ambiente de desenho na tela
-
-	ClearBackground(RAYWHITE); //Limpa a tela e define cor de fundo
-
-    DrawCircleV(posicao_nave, 30, RED);
-
-	EndDrawing(); //Finaliza o ambiente de desenho na tela
+void iniciar_jogo() {
+    // 1. CARREGAMENTO (Executado apenas 1 vez, fora do loop)
+    carregar_mapa();
+    Vector2 posicao_nave;
+    // Inicializa a nave
+    for(int i = 0; i < MAX_MAPA;i++){
+        if(mapa[i].tipo == 'A') posicao_nave = (Vector2){mapa[i].hitbox.x, mapa[i].hitbox.y};
     }
+    // Otimização: Apenas a nave e o mapa precisam ser desenhados no loop
 
+    // LOOP PRINCIPAL DO JOGO
+    while (!WindowShouldClose()) {
 
+        // --- 1. ATUALIZAÇÃO (Lógica do Jogo) ---
+        // Trata entrada do usuario e atualiza estado do jogo
+        if (IsKeyDown(KEY_RIGHT)) posicao_nave.x += 2;
+        if (IsKeyDown(KEY_LEFT))  posicao_nave.x -= 2;
+
+        // --- 2. DESENHO ---
+        // Atualiza o que eh mostrado na tela a partir do estado do jogo
+
+        BeginDrawing(); // ⬅️ INÍCIO DO FRAME
+
+            // A) Limpa a tela (Redesenha o fundo branco)
+            ClearBackground(RAYWHITE);
+
+            // B) Desenha o Mapa (Estático)
+            desenhar_mapa();
+
+            // C) Desenha a Nave (Dinâmico)
+            DrawCircleV(posicao_nave, 20, YELLOW);
+
+        EndDrawing(); // ⬅️ FIM DO FRAME: O novo quadro é exibido.
+    }
 }

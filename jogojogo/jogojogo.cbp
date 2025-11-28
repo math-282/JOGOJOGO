@@ -34,6 +34,17 @@
 		<Unit filename="Main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="desenhar_mapa.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jogo.h" />
+		<Unit filename="jogo_nave" />
+		<Unit filename="jogo_nave.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
